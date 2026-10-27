@@ -44,4 +44,7 @@ app.put('/api/:col/:id',auth,model,async(req,res)=>{const d=await req.M.findById
 app.delete('/api/:col/:id',auth,model,async(req,res)=>{await req.M.findByIdAndDelete(req.params.id).catch(()=>null)
   if(req.params.col==='experiments')await M.subexperiments.deleteMany({experimentId:req.params.id});res.json({ok:true})})
 app.use((err,req,res,next)=>res.status(400).json({error:err.message}))
-app.listen(PORT,()=>console.log('API running on http://localhost:'+PORT))
+// app.listen(PORT,()=>console.log('API running on http://localhost:'+PORT))
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`API running on port ${PORT}`)
+})
